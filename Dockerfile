@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN mkdir /shlides
 
-WRKDIR /shlides
+WORKDIR /shlides
 
 COPY components.sh /shlides
 
