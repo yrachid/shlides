@@ -28,7 +28,7 @@ function next_slide() {
 function previous_slide() {
   if [[ ! "$CURRENT_SLIDE" = "0" ]]; then
     CURRENT_SLIDE=$((CURRENT_SLIDE - 1))
-    present ${current_slide}
+    present $(current_slide)
   fi
 }
 
