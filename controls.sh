@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LAST_SLIDE=0
+CURRENT_SLIDE=0
 
 function slide_count() {
   ls ./slides | wc -l | sed 's/ //g'
@@ -10,17 +10,25 @@ function slide_list() {
   ls ./slides | sort
 }
 
+function current_slide() {
+  slide_list | sed -n "${CURRENT_SLIDE}p"
+}
+
+function present() {
+  ./slides/$1
+}
+
 function next_slide() {
-  if [[ ! "$LAST_SLIDE" = "${slide_count}" ]]; then
-    LAST_SLIDE=$((LAST_SLIDE + 1))
-    slide_list | sed -n "${LAST_SLIDE}p"
+  if [[ ! "$CURRENT_SLIDE" = "${slide_count}" ]]; then
+    CURRENT_SLIDE=$((CURRENT_SLIDE + 1))
+    present $(current_slide)
   fi
 }
 
 function previous_slide() {
-  if [[ ! "$LAST_SLIDE" = "0" ]]; then
-    LAST_SLIDE=$((LAST_SLIDE - 1))
-    slide_list | sed -n "${LAST_SLIDE}p"
+  if [[ ! "$CURRENT_SLIDE" = "0" ]]; then
+    CURRENT_SLIDE=$((CURRENT_SLIDE - 1))
+    present ${current_slide}
   fi
 }
 
