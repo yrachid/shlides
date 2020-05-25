@@ -9,6 +9,6 @@ do
   printf "\n"
 done
 
-title="I am text"
+title="\033[1mI am bold text.\033[0m"
 
-printf "%*s\n" $(((${#title}+$COLUMNS)/2)) "$title"
+printf "%*b\n" $(((${#title}+$COLUMNS)/2)) "$title"
