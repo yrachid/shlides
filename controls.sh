@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 CURRENT_SLIDE=0
 
@@ -12,7 +12,7 @@ slides_location() {
 }
 
 slide_count() {
-  ls $(slides_location) | wc -l | sed 's/ //g'
+  ls -1 $(slides_location) | wc -l | sed 's/ //g'
 }
 
 slide_list() {
@@ -28,23 +28,26 @@ current_slide() {
 }
 
 present() {
+  local slide_to_present=${1:-1}
   tput reset
-  $(slides_location)/$1
+  $(slides_location)/$slide_to_present
   wait_for_command
 }
 
 next_slide() {
-  if [[ ! "$CURRENT_SLIDE" = "${slide_count}" ]]; then
+  if [ "$CURRENT_SLIDE" -lt "$(slide_count)" ]; then
     CURRENT_SLIDE=$((CURRENT_SLIDE + 1))
-    present $(current_slide)
   fi
+
+  present "$(current_slide)"
 }
 
 previous_slide() {
-  if [[ ! "$CURRENT_SLIDE" = "0" ]]; then
+  if [ ! "$CURRENT_SLIDE" -eq "1" ]; then
     CURRENT_SLIDE=$((CURRENT_SLIDE - 1))
-    present $(current_slide)
   fi
+
+  present "$(current_slide)"
 }
 
 start_presentation() {

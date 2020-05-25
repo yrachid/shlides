@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 readonly SLIDES_LOCATION="${1:-${PWD}/sample-slides}"
 
