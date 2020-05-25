@@ -23,7 +23,7 @@ start() {
       exit 0
       ;;
     s)
-      next_slide
+      start_presentation
       ;;
     *)
       start

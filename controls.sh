@@ -48,6 +48,17 @@ previous_slide() {
   fi
 }
 
+start_presentation() {
+  clear
+  printf "Instructions. Pretty much Vim bindings:\n"
+  printf "  j: next slide\n"
+  printf "  k: prev slide\n"
+  printf "  q: quit\n\n"
+  printf "Press any key to start"
+  read -n1 whatever
+  next_slide
+}
+
 wait_for_command() {
   read -n1 cmd
   case $cmd in

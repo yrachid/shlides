@@ -1,1 +1,7 @@
-echo "    Im slide 02"
+#!/bin/bash
+
+echo "    "
+echo "    "
+echo "    This is code"
+echo "    "
+echo "    "
