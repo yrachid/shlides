@@ -11,4 +11,7 @@ done
 
 title="\033[1mI am bold text.\033[0m"
 
-printf "%*b\n" $(((${#title}+$COLUMNS)/2)) "$title"
+readonly CENTERED_CONTENT_LENGTH=$((${#title} + $COLUMNS))
+readonly HORIZONTAL_OFFSET=$(($CENTERED_CONTENT_LENGTH / 2))
+
+printf "%*b\n" $HORIZONTAL_OFFSET "$title"
