@@ -1,61 +1,68 @@
 #!/bin/bash
 
 CURRENT_SLIDE=0
+readonly SLIDE_FOLDER="${PWD}/slides"
 
-function slide_count() {
-  ls ./slides | wc -l | sed 's/ //g'
+quit_presentation() {
+  clear
+  exit 0
 }
 
-function slide_list() {
-  ls ./slides | sort
+slides_location() {
+  printf "${SLIDE_FOLDER}"
 }
 
-function current_slide() {
+slide_count() {
+  ls "${SLIDE_FOLDER}" | wc -l | sed 's/ //g'
+}
+
+slide_list() {
+  ls "${SLIDE_FOLDER}" | sort
+}
+
+inline_slide_list() {
+  slide_list | tr '\n' ' '
+}
+
+current_slide() {
   slide_list | sed -n "${CURRENT_SLIDE}p"
 }
 
-function present() {
-  ./slides/$1
+present() {
+  clear
+  $SLIDE_FOLDER/$1
+  wait_for_command
 }
 
-function next_slide() {
+next_slide() {
   if [[ ! "$CURRENT_SLIDE" = "${slide_count}" ]]; then
     CURRENT_SLIDE=$((CURRENT_SLIDE + 1))
     present $(current_slide)
   fi
 }
 
-function previous_slide() {
+previous_slide() {
   if [[ ! "$CURRENT_SLIDE" = "0" ]]; then
     CURRENT_SLIDE=$((CURRENT_SLIDE - 1))
     present $(current_slide)
   fi
 }
 
-echo "Slide count:"
-slide_count
-echo
+wait_for_command() {
+  read -n1 cmd
+  case $cmd in
+    j)
+      next_slide
+      ;;
+    k)
+      previous_slide
+      ;;
+    q)
+      quit_presentation
+      ;;
+    *)
+      wait_for_command
+      ;;
+  esac
+}
 
-echo "Slide list:"
-slide_list
-echo
-
-echo "Next slide:"
-next_slide
-echo
-
-echo "Next slide:"
-next_slide
-echo
-
-echo "Next slide:"
-next_slide
-echo
-
-echo "Previous Slide:"
-previous_slide
-echo
-
-echo "Previous Slide:"
-previous_slide
-echo
