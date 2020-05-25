@@ -1,1 +1,1 @@
-echo "    Im slide 04"
+echo "    Let's run some python"
