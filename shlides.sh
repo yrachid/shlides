@@ -1,5 +1,7 @@
 #!/bin/bash
 
+readonly SLIDES_LOCATION="${1:-${PWD}/sample-slides}"
+
 source ./controls.sh
 
 start() {

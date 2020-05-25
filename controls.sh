@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CURRENT_SLIDE=0
-readonly SLIDE_FOLDER="${PWD}/slides"
 
 quit_presentation() {
   tput reset
@@ -9,15 +8,15 @@ quit_presentation() {
 }
 
 slides_location() {
-  printf "${SLIDE_FOLDER}"
+  printf "${SLIDES_LOCATION}"
 }
 
 slide_count() {
-  ls "${SLIDE_FOLDER}" | wc -l | sed 's/ //g'
+  ls $(slides_location) | wc -l | sed 's/ //g'
 }
 
 slide_list() {
-  ls "${SLIDE_FOLDER}" | sort
+  ls $(slides_location) | sort
 }
 
 inline_slide_list() {
@@ -30,7 +29,7 @@ current_slide() {
 
 present() {
   tput reset
-  $SLIDE_FOLDER/$1
+  $(slides_location)/$1
   wait_for_command
 }
 
@@ -50,7 +49,7 @@ previous_slide() {
 
 start_presentation() {
   clear
-  printf "Instructions. Pretty much Vim bindings:\n"
+  printf "Instructions:\n"
   printf "  j: next slide\n"
   printf "  k: prev slide\n"
   printf "  q: quit\n\n"
