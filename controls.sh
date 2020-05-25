@@ -4,7 +4,7 @@ CURRENT_SLIDE=0
 readonly SLIDE_FOLDER="${PWD}/slides"
 
 quit_presentation() {
-  clear
+  tput reset
   exit 0
 }
 
@@ -29,7 +29,7 @@ current_slide() {
 }
 
 present() {
-  clear
+  tput reset
   $SLIDE_FOLDER/$1
   wait_for_command
 }
