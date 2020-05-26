@@ -37,7 +37,7 @@ present() {
   local slide_to_present=${1:-1}
   transition
   $(slides_location)/$slide_to_present
-  wait_for_command
+  wait_for_navigation_command
 }
 
 next_slide() {
@@ -90,7 +90,7 @@ start_presentation() {
   next_slide
 }
 
-wait_for_command() {
+wait_for_navigation_command() {
   read -n1 cmd
   case $cmd in
     j)
@@ -103,7 +103,7 @@ wait_for_command() {
       quit_presentation
       ;;
     *)
-      wait_for_command
+      wait_for_navigation_command
       ;;
   esac
 }
