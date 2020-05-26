@@ -1,4 +1,5 @@
 
 - [ ] Help text
+- [ ] Insert slide in middle and shift other slides
 - [X] Fix next and prev bug
 - [X] Allow slide folder location to be passed as argument
