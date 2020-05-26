@@ -1,21 +1,25 @@
 use std::io;
-use termion::raw::IntoRawMode;
-use tui::Terminal;
-use tui::backend::TermionBackend;
-use tui::widgets::{Widget, Block, Borders};
-use tui::layout::{Layout, Constraint, Direction};
 
-fn main() -> Result<(), io::Error> {
-    let stdout = io::stdout().into_raw_mode()?;
-    let backend = TermionBackend::new(stdout);
-    let mut terminal = Terminal::new(backend)?;
+fn main() {
+    let inp = read_input();
 
-    terminal.draw(|mut f| {
-        let size = f.size();
-        let block = Block::default()
-            .title("Block")
-            .borders(Borders::ALL);
+    println!("{}", inp)
+}
 
-        f.render_widget(block, size);
-    })
+fn read_input() -> String {
+    let mut output = String::new();
+    loop {
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read from stdin");
+
+        if input.trim().to_string() == "" {
+            break;
+        } else {
+            output = output + &input;
+        }
+    };
+
+    return output;
 }
