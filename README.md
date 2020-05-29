@@ -17,3 +17,6 @@ Running with your own slides:
 
 This is also something new.
 This is something new.
+
+Uma frase daora.
+Outra frase inspiradora
