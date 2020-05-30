@@ -14,9 +14,3 @@ Running with your own slides:
 ```
 ./shlides folder-with-my-presentation-slides
 ```
-
-This is also something new.
-This is something new.
-
-Uma frase daora.
-Outra frase inspiradora
